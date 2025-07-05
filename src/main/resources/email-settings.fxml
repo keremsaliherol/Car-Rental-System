@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.EmailSettingsController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #FF5722, #FF7043);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="✉️" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="Email Settings" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="📧 Test Email" onAction="#handleTestEmail"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="Email Configuration &amp; Notification Settings" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Status Cards -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Email Status Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📧" style="-fx-font-size: 32px;"/>
+                        <Label text="Email Service" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="emailStatusLabel" text="Active" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="status" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Emails Sent Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📤" style="-fx-font-size: 32px;"/>
+                        <Label text="Emails Sent" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="emailsSentLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="today" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Failed Emails Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFEBEE; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(244,67,54,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="❌" style="-fx-font-size: 32px;"/>
+                        <Label text="Failed Emails" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                        <Label fx:id="failedEmailsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #B71C1C;"/>
+                        <Label text="errors" style="-fx-font-size: 12px; -fx-text-fill: #F44336;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Queue Size Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFF3E0; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(255,152,0,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="⏳" style="-fx-font-size: 32px;"/>
+                        <Label text="Queue Size" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #E65100;"/>
+                        <Label fx:id="queueSizeLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #BF360C;"/>
+                        <Label text="pending" style="-fx-font-size: 12px; -fx-text-fill: #FF9800;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Main Settings Section -->
+            <HBox spacing="20">
+               <children>
+                  <!-- SMTP Configuration Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="📧 SMTP Configuration" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <GridPane hgap="15" vgap="15">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                              <ColumnConstraints hgrow="ALWAYS"/>
+                           </columnConstraints>
+                           
+                           <Label text="SMTP Server:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="smtpServerField" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="smtp.gmail.com"/>
+                           
+                           <Label text="Port:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="smtpPortField" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="587"/>
+                           
+                           <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="smtpUsernameField" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="your-email@gmail.com"/>
+                           
+                           <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                           <PasswordField fx:id="smtpPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="your-app-password"/>
+                           
+                           <Label text="From Name:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="fromNameField" GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="Car Rental System"/>
+                           
+                           <Label text="From Email:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="fromEmailField" GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="noreply@carrentalsystem.com"/>
+                        </GridPane>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <CheckBox fx:id="enableSSLCheckBox" text="Enable SSL/TLS" selected="true"/>
+                              <CheckBox fx:id="enableAuthCheckBox" text="Enable Authentication" selected="true"/>
+                           </children>
+                        </HBox>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <Button text="💾 Save SMTP Settings" onAction="#handleSaveSMTPSettings"
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="🔄 Reset to Default" onAction="#handleResetSMTPSettings"
+                                      style="-fx-background-color: #f0f0f0; -fx-text-fill: #666; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Notification Settings Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" prefWidth="400">
+                     <children>
+                        <Label text="🔔 Notification Settings" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <VBox spacing="10">
+                           <children>
+                              <CheckBox fx:id="welcomeEmailCheckBox" text="Send welcome emails to new users" selected="true"/>
+                              <CheckBox fx:id="rentalConfirmationCheckBox" text="Send rental confirmation emails" selected="true"/>
+                              <CheckBox fx:id="reminderEmailCheckBox" text="Send rental reminder emails" selected="true"/>
+                              <CheckBox fx:id="returnReminderCheckBox" text="Send return reminder emails" selected="true"/>
+                              <CheckBox fx:id="paymentConfirmationCheckBox" text="Send payment confirmation emails" selected="true"/>
+                              <CheckBox fx:id="adminNotificationCheckBox" text="Send admin notification emails" selected="true"/>
+                           </children>
+                        </VBox>
+                        
+                        <Separator/>
+                        
+                        <Label text="📧 Email Templates" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <VBox spacing="8">
+                           <children>
+                              <Button text="✏️ Edit Welcome Email Template" onAction="#handleEditWelcomeTemplate" prefWidth="350"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                              <Button text="✏️ Edit Confirmation Email Template" onAction="#handleEditConfirmationTemplate" prefWidth="350"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                              <Button text="✏️ Edit Reminder Email Template" onAction="#handleEditReminderTemplate" prefWidth="350"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </VBox>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <Button text="💾 Save Notification Settings" onAction="#handleSaveNotificationSettings"
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Email Log Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="📋 Email Activity Log" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Refresh Log" onAction="#handleRefreshLog"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                        <Button text="🗑️ Clear Log" onAction="#handleClearLog"
+                                style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="emailLogTable" prefHeight="250" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="timestampColumn" prefWidth="150" text="Timestamp" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="recipientColumn" prefWidth="200" text="Recipient" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="subjectColumn" prefWidth="250" text="Subject" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="typeColumn" prefWidth="120" text="Type" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="100" text="Status" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="errorColumn" prefWidth="200" text="Error Message" style="-fx-alignment: CENTER_LEFT;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ Email settings loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="📧 Configure email notifications and SMTP settings" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.EmailSettingsController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #FF5722, #FF7043);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="✉️" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="Email Settings" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="📧 Test Email" onAction="#handleTestEmail"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="Email Configuration &amp; Notification Settings" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Status Cards -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Email Status Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📧" style="-fx-font-size: 32px;"/>
+                        <Label text="Email Service" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="emailStatusLabel" text="Active" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="status" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Emails Sent Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📤" style="-fx-font-size: 32px;"/>
+                        <Label text="Emails Sent" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="emailsSentLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="today" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Failed Emails Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFEBEE; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(244,67,54,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="❌" style="-fx-font-size: 32px;"/>
+                        <Label text="Failed Emails" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                        <Label fx:id="failedEmailsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #B71C1C;"/>
+                        <Label text="errors" style="-fx-font-size: 12px; -fx-text-fill: #F44336;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Queue Size Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFF3E0; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(255,152,0,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="⏳" style="-fx-font-size: 32px;"/>
+                        <Label text="Queue Size" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #E65100;"/>
+                        <Label fx:id="queueSizeLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #BF360C;"/>
+                        <Label text="pending" style="-fx-font-size: 12px; -fx-text-fill: #FF9800;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Main Settings Section -->
+            <HBox spacing="20">
+               <children>
+                  <!-- SMTP Configuration Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="📧 SMTP Configuration" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <GridPane hgap="15" vgap="15">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="NEVER" minWidth="120"/>
+                              <ColumnConstraints hgrow="ALWAYS"/>
+                           </columnConstraints>
+                           
+                           <Label text="SMTP Server:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="smtpServerField" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="smtp.gmail.com"/>
+                           
+                           <Label text="Port:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="smtpPortField" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="587"/>
+                           
+                           <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="smtpUsernameField" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="your-email@gmail.com"/>
+                           
+                           <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                           <PasswordField fx:id="smtpPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="your-app-password"/>
+                           
+                           <Label text="From Name:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="fromNameField" GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="Car Rental System"/>
+                           
+                           <Label text="From Email:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                           <TextField fx:id="fromEmailField" GridPane.columnIndex="1" GridPane.rowIndex="5" promptText="noreply@carrentalsystem.com"/>
+                        </GridPane>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <CheckBox fx:id="enableSSLCheckBox" text="Enable SSL/TLS" selected="true"/>
+                              <CheckBox fx:id="enableAuthCheckBox" text="Enable Authentication" selected="true"/>
+                           </children>
+                        </HBox>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <Button text="💾 Save SMTP Settings" onAction="#handleSaveSMTPSettings"
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="🔄 Reset to Default" onAction="#handleResetSMTPSettings"
+                                      style="-fx-background-color: #f0f0f0; -fx-text-fill: #666; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Notification Settings Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" prefWidth="400">
+                     <children>
+                        <Label text="🔔 Notification Settings" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <VBox spacing="10">
+                           <children>
+                              <CheckBox fx:id="welcomeEmailCheckBox" text="Send welcome emails to new users" selected="true"/>
+                              <CheckBox fx:id="rentalConfirmationCheckBox" text="Send rental confirmation emails" selected="true"/>
+                              <CheckBox fx:id="reminderEmailCheckBox" text="Send rental reminder emails" selected="true"/>
+                              <CheckBox fx:id="returnReminderCheckBox" text="Send return reminder emails" selected="true"/>
+                              <CheckBox fx:id="paymentConfirmationCheckBox" text="Send payment confirmation emails" selected="true"/>
+                              <CheckBox fx:id="adminNotificationCheckBox" text="Send admin notification emails" selected="true"/>
+                           </children>
+                        </VBox>
+                        
+                        <Separator/>
+                        
+                        <Label text="📧 Email Templates" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <VBox spacing="8">
+                           <children>
+                              <Button text="✏️ Edit Welcome Email Template" onAction="#handleEditWelcomeTemplate" prefWidth="350"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                              <Button text="✏️ Edit Confirmation Email Template" onAction="#handleEditConfirmationTemplate" prefWidth="350"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                              <Button text="✏️ Edit Reminder Email Template" onAction="#handleEditReminderTemplate" prefWidth="350"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </VBox>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <Button text="💾 Save Notification Settings" onAction="#handleSaveNotificationSettings"
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Email Log Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="📋 Email Activity Log" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Refresh Log" onAction="#handleRefreshLog"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                        <Button text="🗑️ Clear Log" onAction="#handleClearLog"
+                                style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="emailLogTable" prefHeight="250" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="timestampColumn" prefWidth="150" text="Timestamp" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="recipientColumn" prefWidth="200" text="Recipient" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="subjectColumn" prefWidth="250" text="Subject" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="typeColumn" prefWidth="120" text="Type" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="100" text="Status" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="errorColumn" prefWidth="200" text="Error Message" style="-fx-alignment: CENTER_LEFT;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ Email settings loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="📧 Configure email notifications and SMTP settings" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 

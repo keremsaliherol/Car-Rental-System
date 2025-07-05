@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kerem.ordersystem.carrentalsystem.controller.CustomerFormController"
+            prefWidth="400" prefHeight="350">
+
+    <VBox spacing="10" layoutX="50" layoutY="20" alignment="TOP_LEFT">
+        <TextField fx:id="nameField" promptText="Full Name"/>
+        <TextField fx:id="phoneField" promptText="Phone"/>
+        <TextField fx:id="addressField" promptText="Address"/>
+        <TextField fx:id="licenseField" promptText="Driver License No (min. 5 characters)"/>
+        <DatePicker fx:id="dobPicker" promptText="Date of Birth"/>
+        <Button text="Save Customer" onAction="#saveCustomer"/>
+        <Label fx:id="statusLabel"/>
+    </VBox>
+</AnchorPane>

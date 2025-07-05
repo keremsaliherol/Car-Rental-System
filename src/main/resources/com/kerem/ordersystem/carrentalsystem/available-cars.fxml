@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kerem.ordersystem.carrentalsystem.controller.AvailableCarsController"
+            prefWidth="700" prefHeight="500">
+
+    <VBox spacing="10" alignment="CENTER" layoutX="20" layoutY="20">
+        <Label text="🚘 Available Cars" style="-fx-font-size: 18px;"/>
+        <TextField fx:id="searchField" promptText="Search cars..." onKeyReleased="#filterCars" prefWidth="650"/>
+        <TableView fx:id="carTable" prefHeight="350" prefWidth="650">
+            <columns>
+                <TableColumn fx:id="plateColumn" text="Plate" prefWidth="100"/>
+                <TableColumn fx:id="brandColumn" text="Brand" prefWidth="100"/>
+                <TableColumn fx:id="modelColumn" text="Model" prefWidth="100"/>
+                <TableColumn fx:id="rateColumn" text="Daily Rate" prefWidth="100"/>
+                <TableColumn fx:id="categoryColumn" text="Category" prefWidth="100"/>
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+            </columns>
+        </TableView>
+        <HBox spacing="10">
+            <DatePicker fx:id="startDatePicker" promptText="Start Date"/>
+            <DatePicker fx:id="endDatePicker" promptText="End Date"/>
+            <Button text="Rent Selected" onAction="#handleRent"/>
+        </HBox>
+        <Label fx:id="statusLabel"/>
+    </VBox>
+</AnchorPane>

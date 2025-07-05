@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.MyRentalsController"
+           prefWidth="1000" prefHeight="700">
+   <!-- Top Navigation Bar -->
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-padding: 15 25;">
+         <children>
+            <ImageView fitHeight="32" fitWidth="32" preserveRatio="true" smooth="true" cache="true">
+               <image>
+                  <Image url="@applogo.png" smooth="true" backgroundLoading="true" requestedWidth="64" requestedHeight="64"/>
+               </image>
+            </ImageView>
+            <Label text="My Rentals" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <!-- Back Button -->
+            <Button text="🔙 Back" onAction="#handleBack"
+                    style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 8 16; -fx-cursor: hand;"/>
+         </children>
+      </HBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="0" style="-fx-background-color: #f8f9fa;">
+         
+         <!-- Header Section -->
+         <VBox alignment="CENTER" spacing="15" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #42A5F5 0%, #1976D2 100%); -fx-padding: 40;">
+            <children>
+               <Label text="📋" style="-fx-font-size: 48px;"/>
+                           <Label text="Your Rental History" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            <Label text="You can track all your rental transactions here" style="-fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.9);"/>
+            </children>
+         </VBox>
+         
+         <!-- Filter Section -->
+         <HBox spacing="20" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+            <children>
+               <VBox spacing="5" alignment="CENTER">
+                  <children>
+                     <Label text="Status" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #666;"/>
+                     <ComboBox fx:id="statusFilterComboBox" promptText="All Statuses"
+                              style="-fx-font-size: 14px; -fx-padding: 8; -fx-border-radius: 6; -fx-background-radius: 6;"
+                              prefWidth="150"/>
+                  </children>
+               </VBox>
+               
+               <VBox spacing="5" alignment="CENTER">
+                  <children>
+                     <Label text="Date Range" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #666;"/>
+                     <ComboBox fx:id="dateRangeComboBox" promptText="All Time"
+                              style="-fx-font-size: 14px; -fx-padding: 8; -fx-border-radius: 6; -fx-background-radius: 6;"
+                              prefWidth="150"/>
+                  </children>
+               </VBox>
+               
+               <Button text="🔍 Filter" onAction="#handleFilter"
+                       style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-border-radius: 6; -fx-background-radius: 6; -fx-cursor: hand;"/>
+               
+               <Button text="🔄 Refresh" onAction="#handleRefresh"
+                       style="-fx-background-color: #E3F2FD; -fx-text-fill: #1976D2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand;"/>
+            </children>
+         </HBox>
+         
+         <!-- Rentals Content -->
+         <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+            <content>
+               <VBox spacing="20" style="-fx-padding: 30;">
+                  <children>
+                     <!-- Section Header -->
+                     <HBox alignment="CENTER_LEFT" spacing="15">
+                        <children>
+                           <Label text="📋 Rental List" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                           <Region HBox.hgrow="ALWAYS"/>
+                           <Label fx:id="rentalCountLabel" text="0 rentals found" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+                        </children>
+                     </HBox>
+                     
+                     <!-- Rentals List -->
+                     <VBox fx:id="rentalsContainer" spacing="15">
+                        <!-- Rental cards will be dynamically added here -->
+                     </VBox>
+                     
+                     <!-- Status Label -->
+                     <Label fx:id="statusLabel" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-text-alignment: center;" wrapText="true"/>
+                  </children>
+               </VBox>
+            </content>
+         </ScrollPane>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER" spacing="20" style="-fx-background-color: #263238; -fx-padding: 15;">
+         <children>
+            <Label text="📞 Support: 0850 123 45 67" style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            <Label text="•" style="-fx-text-fill: rgba(255,255,255,0.5);"/>
+            <Label text="📧 info@arackiralama.com" style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            <Label text="•" style="-fx-text-fill: rgba(255,255,255,0.5);"/>
+            <Label text="🕒 24/7 Service" style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 

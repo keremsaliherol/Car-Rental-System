@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kerem.ordersystem.carrentalsystem.controller.CarFormController"
+            prefWidth="500" prefHeight="500">
+
+    <VBox spacing="10" layoutX="50" layoutY="20" alignment="TOP_LEFT">
+
+        <Label text="➕ Add New Car" style="-fx-font-size: 18px;"/>
+
+        <TextField fx:id="plateField" promptText="Plate Number"/>
+        <TextField fx:id="brandField" promptText="Brand"/>
+        <TextField fx:id="modelField" promptText="Model"/>
+        <TextField fx:id="yearField" promptText="Year"/>
+        <TextField fx:id="rateField" promptText="Daily Rate"/>
+        <ComboBox fx:id="categoryComboBox" promptText="Select Category"/>
+        <TextField fx:id="mileageField" promptText="Mileage"/>
+        <TextArea fx:id="descriptionField" promptText="Description" prefRowCount="3"/>
+
+        <Button text="Add Car" onAction="#handleSaveCar"/>
+        <Label fx:id="statusLabel"/>
+
+    </VBox>
+</AnchorPane> 

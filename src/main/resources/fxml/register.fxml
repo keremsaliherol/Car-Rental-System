@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.RegisterController" fitToWidth="true" fitToHeight="true" styleClass="scroll-pane">
+   
+   <content>
+      <VBox alignment="CENTER" spacing="20.0" styleClass="register-main-container">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         
+         <!-- Header Section -->
+         <VBox alignment="CENTER" spacing="10.0" styleClass="header-section">
+            <Label text="🚗" styleClass="app-logo">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Label text="Yeni Hesap Oluştur" styleClass="page-title">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label text="Hızlı ve kolay kayıt olun" styleClass="page-subtitle">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </VBox>
+         
+         <!-- Form Container -->
+         <VBox spacing="15.0" styleClass="form-container" maxWidth="450.0">
+            <padding>
+               <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+            
+            <!-- Personal Info Section -->
+            <Label text="👤 Kişisel Bilgiler" styleClass="section-header">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            
+            <!-- Full Name -->
+            <VBox spacing="5.0">
+               <Label text="Ad Soyad *" styleClass="field-label" />
+               <TextField fx:id="fullNameField" promptText="Örn: Ahmet Yılmaz" styleClass="modern-field" 
+                         editable="true" focusTraversable="true" disable="false" />
+            </VBox>
+            
+            <!-- Email -->
+            <VBox spacing="5.0">
+               <Label text="E-posta Adresi *" styleClass="field-label" />
+               <TextField fx:id="emailField" promptText="Örn: ahmet@email.com" styleClass="modern-field" 
+                         editable="true" focusTraversable="true" disable="false" />
+            </VBox>
+            
+            <!-- Phone -->
+            <VBox spacing="5.0">
+               <Label text="Telefon Numarası *" styleClass="field-label" />
+               <TextField fx:id="phoneField" promptText="Örn: 0532 123 45 67" styleClass="modern-field" 
+                         editable="true" focusTraversable="true" disable="false" />
+            </VBox>
+            
+            <!-- Birth Date -->
+            <VBox spacing="5.0">
+               <Label text="Doğum Tarihi *" styleClass="field-label" />
+               <DatePicker fx:id="birthDatePicker" promptText="Doğum tarihinizi seçin" styleClass="modern-field" 
+                          editable="true" focusTraversable="true" disable="false" />
+            </VBox>
+            
+            <!-- Driver License -->
+            <VBox spacing="5.0">
+               <Label text="Ehliyet Numarası *" styleClass="field-label" />
+               <TextField fx:id="driverLicenseField" promptText="Örn: 12345678901" styleClass="modern-field" 
+                         editable="true" focusTraversable="true" disable="false" />
+            </VBox>
+            
+            <Separator />
+            
+            <!-- Account Info Section -->
+            <Label text="🔐 Hesap Bilgileri" styleClass="section-header">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            
+            <!-- Username -->
+            <VBox spacing="5.0">
+               <Label text="Kullanıcı Adı *" styleClass="field-label" />
+               <TextField fx:id="usernameField" promptText="Örn: ahmetyilmaz" styleClass="modern-field" 
+                         editable="true" focusTraversable="true" disable="false" />
+               <Label text="💡 En az 3 karakter, sadece harf ve rakam" styleClass="help-text" />
+            </VBox>
+            
+            <!-- Password -->
+            <VBox spacing="5.0">
+               <Label text="Şifre *" styleClass="field-label" />
+               <PasswordField fx:id="passwordField" promptText="En az 6 karakter" styleClass="modern-field" 
+                             editable="true" focusTraversable="true" disable="false" />
+               <Label text="💡 Güvenli bir şifre seçin" styleClass="help-text" />
+            </VBox>
+            
+            <!-- Confirm Password -->
+            <VBox spacing="5.0">
+               <Label text="Şifre Tekrar *" styleClass="field-label" />
+               <PasswordField fx:id="confirmPasswordField" promptText="Şifrenizi tekrar girin" styleClass="modern-field" 
+                             editable="true" focusTraversable="true" disable="false" />
+            </VBox>
+            
+            <Separator />
+            
+            <!-- Terms and Conditions -->
+            <HBox spacing="10.0" alignment="CENTER_LEFT" styleClass="terms-container">
+               <CheckBox fx:id="agreeTermsCheckBox" styleClass="modern-checkbox" />
+               <VBox spacing="2.0">
+                  <Label text="Kullanım şartlarını ve gizlilik politikasını" styleClass="terms-text" />
+                  <Label text="okudum ve kabul ediyorum *" styleClass="terms-text" />
+               </VBox>
+            </HBox>
+            
+            <!-- Buttons -->
+            <VBox spacing="10.0">
+               <Button fx:id="registerButton" text="✅ Hesap Oluştur" onAction="#handleRegister" 
+                      styleClass="primary-button" maxWidth="Infinity">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Button>
+               
+               <Button fx:id="backButton" text="⬅️ Giriş Sayfasına Dön" onAction="#handleBackToLogin" 
+                      styleClass="secondary-button" maxWidth="Infinity">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Button>
+            </VBox>
+            
+            <!-- Status Message -->
+            <Label fx:id="messageLabel" text="" styleClass="message-label" wrapText="true" />
+            
+         </VBox>
+         
+         <!-- Footer -->
+         <VBox alignment="CENTER" spacing="5.0" styleClass="footer-section">
+            <Label text="🔒 Bilgileriniz güvenli şekilde saklanır" styleClass="security-text" />
+            <Label text="© 2024 Araç Kiralama Sistemi" styleClass="copyright-text" />
+         </VBox>
+         
+      </VBox>
+   </content>
+   
+</ScrollPane> 

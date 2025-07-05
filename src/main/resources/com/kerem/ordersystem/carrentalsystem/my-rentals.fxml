@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kerem.ordersystem.carrentalsystem.controller.MyRentalsController"
+            prefWidth="700" prefHeight="450">
+
+    <VBox spacing="10" alignment="CENTER" layoutX="20" layoutY="20">
+        <Label text="🧾 My Rentals" style="-fx-font-size: 18px;"/>
+        <TextField fx:id="searchField" promptText="Search rentals..." onKeyReleased="#filterRentals" prefWidth="650"/>
+        <TableView fx:id="rentalTable" prefHeight="350" prefWidth="650">
+            <columns>
+                <TableColumn fx:id="plateColumn" text="Plate" prefWidth="100"/>
+                <TableColumn fx:id="brandColumn" text="Brand" prefWidth="100"/>
+                <TableColumn fx:id="startColumn" text="Start Date" prefWidth="120"/>
+                <TableColumn fx:id="endColumn" text="End Date" prefWidth="120"/>
+                <TableColumn fx:id="totalColumn" text="Total Price" prefWidth="100"/>
+            </columns>
+        </TableView>
+        <Button text="Cancel Selected Rental" onAction="#handleCancelRental"/>
+        <Label fx:id="statusLabel"/>
+    </VBox>
+</AnchorPane>

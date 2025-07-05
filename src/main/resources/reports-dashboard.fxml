@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.ReportsDashboardController"
+           prefWidth="1400" prefHeight="900">
+   
+   <!-- Top Navigation Bar -->
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: linear-gradient(to right, #FF9800, #F57C00); -fx-padding: 15 25;">
+         <children>
+            <Label text="📊" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+            <Label text="Reports Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button text="🏠 Back to Admin" onAction="#handleBackToAdmin" style="-fx-background-color: #E65100; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+         </children>
+      </HBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f5f5;">
+         <content>
+            <VBox spacing="25" style="-fx-padding: 30;">
+               <children>
+                  
+                  <!-- Report Generation Controls -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <Label text="📋 Report Generation" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                           <children>
+                              <ComboBox fx:id="reportTypeComboBox" promptText="Select Report Type" 
+                                        style="-fx-padding: 10; -fx-border-radius: 6; -fx-background-radius: 6;" 
+                                        prefWidth="200"/>
+                              
+                              <DatePicker fx:id="startDatePicker" promptText="Start Date" 
+                                          style="-fx-padding: 10; -fx-border-radius: 6; -fx-background-radius: 6;" 
+                                          prefWidth="150"/>
+                              
+                              <DatePicker fx:id="endDatePicker" promptText="End Date" 
+                                          style="-fx-padding: 10; -fx-border-radius: 6; -fx-background-radius: 6;" 
+                                          prefWidth="150"/>
+                              
+                              <Button text="📊 Generate Report" onAction="#handleGenerateReport" 
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Quick Stats -->
+                  <GridPane hgap="20" vgap="15">
+                     <columnConstraints>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                        <ColumnConstraints percentWidth="25"/>
+                     </columnConstraints>
+                     
+                     <VBox spacing="5" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" GridPane.columnIndex="0">
+                        <children>
+                           <Label text="💰" style="-fx-font-size: 24px;"/>
+                           <Label fx:id="totalRevenueLabel" text="₺0.00" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                           <Label text="Total Revenue" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" GridPane.columnIndex="1">
+                        <children>
+                           <Label text="📋" style="-fx-font-size: 24px;"/>
+                           <Label fx:id="totalRentalsLabel" text="0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+                           <Label text="Total Rentals" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" GridPane.columnIndex="2">
+                        <children>
+                           <Label text="👥" style="-fx-font-size: 24px;"/>
+                           <Label fx:id="totalCustomersLabel" text="0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #F57C00;"/>
+                           <Label text="Total Customers" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 8; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);" GridPane.columnIndex="3">
+                        <children>
+                           <Label text="🚗" style="-fx-font-size: 24px;"/>
+                           <Label fx:id="totalCarsLabel" text="0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #7B1FA2;"/>
+                           <Label text="Total Cars" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                        </children>
+                     </VBox>
+                  </GridPane>
+                  
+                  <!-- Report Categories -->
+                  <HBox spacing="20">
+                     <children>
+                        
+                        <!-- Financial Reports -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="💰 Financial Reports" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              
+                              <VBox spacing="10">
+                                 <children>
+                                    <Button text="📊 Revenue Summary" onAction="#handleRevenueReport" 
+                                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                    
+                                    <Button text="💳 Payment Analysis" onAction="#handlePaymentAnalysis" 
+                                            style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                    
+                                    <Button text="📈 Monthly Report" onAction="#handleMonthlyReport" 
+                                            style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- Operational Reports -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="⚙️ Operational Reports" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              
+                              <VBox spacing="10">
+                                 <children>
+                                    <Button text="🚗 Fleet Report" onAction="#handleFleetReport" 
+                                            style="-fx-background-color: #FF5722; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                    
+                                    <Button text="📋 Rental Report" onAction="#handleRentalReport" 
+                                            style="-fx-background-color: #607D8B; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                    
+                                    <Button text="🔐 Security Report" onAction="#handleSecurityReport" 
+                                            style="-fx-background-color: #E91E63; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                     </children>
+                  </HBox>
+                  
+                  <!-- Report Viewer -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <Label text="📄 Report Viewer" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <ScrollPane fx:id="reportViewerScrollPane" fitToWidth="true" prefHeight="400" 
+                                    style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                           <content>
+                              <VBox fx:id="reportContainer" spacing="15" style="-fx-padding: 20;">
+                                 <children>
+                                    <Label text="📊 Select a report type and generate to view results here" style="-fx-font-size: 16px; -fx-text-fill: #666; -fx-padding: 50;" alignment="CENTER"/>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+                  
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane> 

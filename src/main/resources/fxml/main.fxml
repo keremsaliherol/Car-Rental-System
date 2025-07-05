@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.MainController">
+   
+   <!-- Üst Kısım - Header -->
+   <top>
+      <VBox styleClass="header">
+         <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="top-bar">
+            <padding>
+               <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+            </padding>
+            <Label text="🚗 Araç Kiralama Sistemi" styleClass="app-title">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="📊 Rapor" onAction="#handleGenerateReport" styleClass="header-btn" />
+            <Button text="🔄 Yenile" onAction="#loadData" styleClass="header-btn" />
+            <Button text="🚪 Çıkış Yap" onAction="#handleLogout" styleClass="logout-btn" />
+            <Button text="❌ Kapat" onAction="#handleExit" styleClass="exit-btn" />
+         </HBox>
+         
+         <!-- Arama Çubuğu -->
+         <HBox alignment="CENTER" spacing="10.0" styleClass="search-bar">
+            <padding>
+               <Insets bottom="15.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <Label text="🔍" />
+            <TextField fx:id="searchField" promptText="Plaka, marka, model veya müşteri adı ile ara..." prefWidth="400.0" styleClass="search-field" />
+            <Button fx:id="searchButton" onAction="#handleSearch" text="Ara" styleClass="search-btn" />
+         </HBox>
+      </VBox>
+   </top>
+   
+   <!-- Ana İçerik Alanı -->
+   <center>
+      <ScrollPane fitToWidth="true" styleClass="main-content">
+         <VBox spacing="20.0">
+            <padding>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            
+            <!-- Dashboard Kartları -->
+            <HBox spacing="20.0" alignment="CENTER">
+               <!-- Araç Yönetimi Kartı -->
+               <VBox styleClass="dashboard-card" spacing="15.0" onMouseClicked="#showCarManagement">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  <Label text="🚗" styleClass="card-icon" />
+                  <Label text="Araç Yönetimi" styleClass="card-title" />
+                  <Label text="Araçları görüntüle, ekle ve düzenle" styleClass="card-description" />
+                  <Button text="Araçları Görüntüle" onAction="#showCarManagement" styleClass="card-button" maxWidth="Infinity" />
+               </VBox>
+               
+               <!-- Kiralama Yönetimi Kartı -->
+               <VBox styleClass="dashboard-card" spacing="15.0">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  <Label text="📋" styleClass="card-icon" />
+                  <Label text="Kiralama İşlemleri" styleClass="card-title" />
+                  <Label text="Yeni kiralama oluştur ve mevcut kiralamaları yönet" styleClass="card-description" />
+                  <Button text="Kiralama Yönet" onAction="#showRentalManagement" styleClass="card-button" maxWidth="Infinity" />
+               </VBox>
+               
+               <!-- Müşteri Yönetimi Kartı -->
+               <VBox styleClass="dashboard-card" spacing="15.0">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  <Label text="👥" styleClass="card-icon" />
+                  <Label text="Müşteri Yönetimi" styleClass="card-title" />
+                  <Label text="Müşteri bilgilerini görüntüle ve düzenle" styleClass="card-description" />
+                  <Button text="Müşterileri Görüntüle" onAction="#showCustomerManagement" styleClass="card-button" maxWidth="Infinity" />
+               </VBox>
+            </HBox>
+            
+            <!-- Hızlı İşlemler -->
+            <VBox spacing="15.0" styleClass="quick-actions">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="⚡ Hızlı İşlemler" styleClass="section-title" />
+               
+               <HBox spacing="15.0" alignment="CENTER">
+                  <Button text="🆕 Yeni Kiralama" onAction="#handleQuickRental" styleClass="quick-action-btn" />
+                  <Button text="📝 Yeni Müşteri" onAction="#handleQuickCustomer" styleClass="quick-action-btn" />
+                  <Button text="🚗 Yeni Araç" onAction="#handleQuickCar" styleClass="quick-action-btn" />
+                  <Button text="📊 Günlük Rapor" onAction="#handleDailyReport" styleClass="quick-action-btn" />
+               </HBox>
+            </VBox>
+            
+            <!-- Özet Bilgiler -->
+            <HBox spacing="20.0" alignment="CENTER">
+               <VBox styleClass="summary-card" spacing="10.0" alignment="CENTER">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <Label text="📈" styleClass="summary-icon" />
+                  <Label fx:id="totalCarsLabel" text="0" styleClass="summary-number" />
+                  <Label text="Toplam Araç" styleClass="summary-text" />
+               </VBox>
+               
+               <VBox styleClass="summary-card" spacing="10.0" alignment="CENTER">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <Label text="🚗" styleClass="summary-icon" />
+                  <Label fx:id="availableCarsLabel" text="0" styleClass="summary-number" />
+                  <Label text="Müsait Araç" styleClass="summary-text" />
+               </VBox>
+               
+               <VBox styleClass="summary-card" spacing="10.0" alignment="CENTER">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <Label text="📋" styleClass="summary-icon" />
+                  <Label fx:id="activeRentalsLabel" text="0" styleClass="summary-number" />
+                  <Label text="Aktif Kiralama" styleClass="summary-text" />
+               </VBox>
+               
+               <VBox styleClass="summary-card" spacing="10.0" alignment="CENTER">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <Label text="👥" styleClass="summary-icon" />
+                  <Label fx:id="totalCustomersLabel" text="0" styleClass="summary-number" />
+                  <Label text="Toplam Müşteri" styleClass="summary-text" />
+               </VBox>
+            </HBox>
+            
+            <!-- Son İşlemler -->
+            <VBox spacing="15.0" styleClass="recent-section">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="🕒 Son İşlemler" styleClass="section-title" />
+               
+               <TableView fx:id="recentActivitiesTable" styleClass="recent-table" maxHeight="200.0">
+                  <columns>
+                     <TableColumn fx:id="activityTypeColumn" text="İşlem Türü" prefWidth="150.0" />
+                     <TableColumn fx:id="activityDescriptionColumn" text="Açıklama" prefWidth="300.0" />
+                     <TableColumn fx:id="activityDateColumn" text="Tarih" prefWidth="150.0" />
+                  </columns>
+               </TableView>
+            </VBox>
+            
+         </VBox>
+      </ScrollPane>
+   </center>
+   
+   <!-- Alt Kısım - Footer -->
+   <bottom>
+      <HBox alignment="CENTER" styleClass="footer">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+         <Label text="© 2024 Araç Kiralama Sistemi - Tüm hakları saklıdır" styleClass="footer-text" />
+      </HBox>
+   </bottom>
+   
+</BorderPane> 

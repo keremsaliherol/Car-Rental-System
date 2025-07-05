@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.UserManagementController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #6A1B9A, #8E24AA);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="👥" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="User Management" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="➕ Add User" onAction="#handleAddUser"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="System Users &amp; Access Control" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Statistics Cards -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Total Users Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="👥" style="-fx-font-size: 32px;"/>
+                        <Label text="Total Users" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="totalUsersLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="registered" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Active Users Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="✅" style="-fx-font-size: 32px;"/>
+                        <Label text="Active Users" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="activeUsersLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="online" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Admin Users Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFF3E0; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(255,152,0,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="👑" style="-fx-font-size: 32px;"/>
+                        <Label text="Administrators" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #E65100;"/>
+                        <Label fx:id="adminUsersLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #BF360C;"/>
+                        <Label text="admins" style="-fx-font-size: 12px; -fx-text-fill: #FF9800;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Users Table -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="👥 System Users" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="totalRecordsLabel" text="Total: 0 users" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="usersTable" prefHeight="400" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="userIdColumn" prefWidth="80" text="ID" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="usernameColumn" prefWidth="150" text="Username" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="emailColumn" prefWidth="200" text="Email" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="roleColumn" prefWidth="120" text="Role" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="100" text="Status" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="createdDateColumn" prefWidth="120" text="Created" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="actionsColumn" prefWidth="180" text="Actions" style="-fx-alignment: CENTER;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ User management loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🔐 Manage system users and access permissions" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.UserManagementController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #6A1B9A, #8E24AA);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="👥" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="User Management" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="➕ Add User" onAction="#handleAddUser"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="System Users &amp; Access Control" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Statistics Cards -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Total Users Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="👥" style="-fx-font-size: 32px;"/>
+                        <Label text="Total Users" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="totalUsersLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="registered" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Active Users Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="✅" style="-fx-font-size: 32px;"/>
+                        <Label text="Active Users" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="activeUsersLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="online" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Admin Users Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFF3E0; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(255,152,0,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="👑" style="-fx-font-size: 32px;"/>
+                        <Label text="Administrators" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #E65100;"/>
+                        <Label fx:id="adminUsersLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #BF360C;"/>
+                        <Label text="admins" style="-fx-font-size: 12px; -fx-text-fill: #FF9800;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Users Table -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="👥 System Users" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="totalRecordsLabel" text="Total: 0 users" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="usersTable" prefHeight="400" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="userIdColumn" prefWidth="80" text="ID" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="usernameColumn" prefWidth="150" text="Username" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="emailColumn" prefWidth="200" text="Email" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="roleColumn" prefWidth="120" text="Role" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="100" text="Status" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="createdDateColumn" prefWidth="120" text="Created" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="actionsColumn" prefWidth="180" text="Actions" style="-fx-alignment: CENTER;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ User management loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🔐 Manage system users and access permissions" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 

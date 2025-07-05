@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.DatabaseTestController">
+   <top>
+      <VBox spacing="10.0" style="-fx-padding: 20;">
+         <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="🗄️ Database Objects Test Interface" />
+         <Label text="Test all 50 database objects: 10 Views + 10 Stored Procedures + 10 Functions + 10 Indexes + 10 Triggers" />
+         <HBox spacing="10.0">
+            <Button fx:id="testAllButton" onAction="#testAllDatabaseObjects" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="🚀 Test All Database Objects" />
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" />
+            <Label fx:id="statusLabel" text="Ready" />
+         </HBox>
+      </VBox>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.7" orientation="VERTICAL">
+         <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+            <!-- Tabs will be created programmatically -->
+         </TabPane>
+         <VBox>
+            <Label style="-fx-font-weight: bold; -fx-padding: 10 0 5 10;" text="📋 Test Results Log:" />
+            <TextArea fx:id="logArea" editable="false" style="-fx-font-family: 'Courier New'; -fx-font-size: 12px;" wrapText="true" VBox.vgrow="ALWAYS" />
+         </VBox>
+      </SplitPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" spacing="20.0" style="-fx-padding: 10; -fx-background-color: #f0f0f0;">
+         <Label text="🎯 Total Database Objects: 50" />
+         <Separator orientation="VERTICAL" />
+         <Label text="📊 Views: 10" />
+         <Label text="🔧 Stored Procedures: 10" />
+         <Label text="⚙️ Functions: 10" />
+         <Label text="📈 Indexes: 10" />
+         <Label text="🔥 Triggers: 10" />
+      </HBox>
+   </bottom>
+</BorderPane> 

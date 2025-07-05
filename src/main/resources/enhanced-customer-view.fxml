@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.EnhancedCustomerViewController"
+           prefWidth="1400" prefHeight="900">
+   
+   <!-- Top Navigation Bar -->
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: linear-gradient(to right, #4CAF50, #2E7D32); -fx-padding: 15 25;">
+         <children>
+            <Label text="👥" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+            <Label text="Enhanced Customer Management" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button text="🏠 Back to Admin" onAction="#handleBackToAdmin" style="-fx-background-color: #1B5E20; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+         </children>
+      </HBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f5f5;">
+         <content>
+            <VBox spacing="25" style="-fx-padding: 30;">
+               <children>
+                  
+                  <!-- Search and Filter Section -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <Label text="🔍 Customer Search & Filters" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                           <children>
+                              <TextField fx:id="searchField" promptText="Search by name, email, phone..." 
+                                         style="-fx-padding: 10; -fx-border-radius: 6; -fx-background-radius: 6;" 
+                                         prefWidth="300"/>
+                              
+                              <ComboBox fx:id="statusFilter" promptText="Filter by Status" 
+                                        style="-fx-padding: 10; -fx-border-radius: 6; -fx-background-radius: 6;" 
+                                        prefWidth="150"/>
+                              
+                              <ComboBox fx:id="securityLevelFilter" promptText="Security Level" 
+                                        style="-fx-padding: 10; -fx-border-radius: 6; -fx-background-radius: 6;" 
+                                        prefWidth="150"/>
+                              
+                              <Button text="🔍 Search" onAction="#handleSearch" 
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand;"/>
+                              
+                              <Button text="🔄 Reset" onAction="#handleResetFilters" 
+                                      style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand;"/>
+                              
+                              <Region HBox.hgrow="ALWAYS"/>
+                              
+                              <Button text="📊 Export Data" onAction="#handleExportData" 
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Customer Table with Security Features -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                           <children>
+                              <Label text="👥 Customer Database" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <Region HBox.hgrow="ALWAYS"/>
+                              <CheckBox fx:id="showEncryptedDataCheckBox" text="🔐 Show Encrypted Data" onAction="#handleToggleEncryptedData" 
+                                        style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              <Button text="🔄 Refresh" onAction="#handleRefreshCustomers" 
+                                      style="-fx-background-color: #f0f0f0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 8 15; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                        
+                        <TableView fx:id="customersTable" prefHeight="400">
+                           <columns>
+                              <TableColumn fx:id="customerIdColumn" text="ID" prefWidth="60"/>
+                              <TableColumn fx:id="customerNameColumn" text="Full Name" prefWidth="150"/>
+                              <TableColumn fx:id="customerEmailColumn" text="Email" prefWidth="180"/>
+                              <TableColumn fx:id="customerPhoneColumn" text="Phone" prefWidth="120"/>
+                              <TableColumn fx:id="driverLicenseColumn" text="Driver License" prefWidth="150"/>
+                              <TableColumn fx:id="encryptionStatusColumn" text="🔐 Encryption" prefWidth="100"/>
+                              <TableColumn fx:id="userAccountColumn" text="👤 User Account" prefWidth="120"/>
+                              <TableColumn fx:id="securityLevelColumn" text="🛡️ Security" prefWidth="100"/>
+                              <TableColumn fx:id="lastActivityColumn" text="Last Activity" prefWidth="130"/>
+                              <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="200"/>
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Customer Details and Security Panel -->
+                  <HBox spacing="20">
+                     <children>
+                        
+                        <!-- Customer Details -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="📋 Customer Details" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              
+                              <ScrollPane fx:id="customerDetailsScrollPane" fitToWidth="true" prefHeight="300" 
+                                          style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                 <content>
+                                    <VBox fx:id="customerDetailsContainer" spacing="10" style="-fx-padding: 10;">
+                                       <children>
+                                          <Label text="Select a customer to view details..." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-padding: 20;"/>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                              
+                              <HBox spacing="10">
+                                 <children>
+                                    <Button text="✏️ Edit Customer" onAction="#handleEditCustomer" 
+                                            style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" 
+                                            HBox.hgrow="ALWAYS"/>
+                                    <Button text="🔐 Manage Security" onAction="#handleManageCustomerSecurity" 
+                                            style="-fx-background-color: #E91E63; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" 
+                                            HBox.hgrow="ALWAYS"/>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- Security & Encryption Panel -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="🔐 Security & Encryption" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              
+                              <!-- Encryption Statistics -->
+                              <VBox spacing="10" style="-fx-background-color: #F3E5F5; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                                 <children>
+                                    <Label text="📊 Encryption Statistics" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #7B1FA2;"/>
+                                    <Label fx:id="encryptedCustomersLabel" text="Encrypted Records: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                                    <Label fx:id="unencryptedCustomersLabel" text="Unencrypted Records: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                                    <Label fx:id="encryptionPercentageLabel" text="Encryption Rate: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                                 </children>
+                              </VBox>
+                              
+                              <!-- Security Actions -->
+                              <VBox spacing="10">
+                                 <children>
+                                    <Button text="🔑 Encrypt All Data" onAction="#handleEncryptAllData" 
+                                            style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                    
+                                    <Button text="🔍 Audit Encrypted Data" onAction="#handleAuditEncryptedData" 
+                                            style="-fx-background-color: #FF5722; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                    
+                                    <Button text="👤 Manage User Accounts" onAction="#handleManageUserAccounts" 
+                                            style="-fx-background-color: #607D8B; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                    
+                                    <Button text="📧 Send Password Reset" onAction="#handleSendPasswordReset" 
+                                            style="-fx-background-color: #00BCD4; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 10 20; -fx-cursor: hand; -fx-font-size: 14px;" 
+                                            maxWidth="Infinity"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                     </children>
+                  </HBox>
+                  
+                  <!-- Customer Activity & Rental History -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                           <children>
+                              <Label text="📈 Customer Activity & Rental History" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <Region HBox.hgrow="ALWAYS"/>
+                              <ComboBox fx:id="activityFilterComboBox" promptText="Filter Activity" 
+                                        style="-fx-padding: 8; -fx-border-radius: 6; -fx-background-radius: 6;" 
+                                        prefWidth="150"/>
+                           </children>
+                        </HBox>
+                        
+                        <TabPane fx:id="activityTabPane" prefHeight="300">
+                           <tabs>
+                              <Tab text="📋 Rental History" closable="false">
+                                 <content>
+                                    <TableView fx:id="rentalHistoryTable">
+                                       <columns>
+                                          <TableColumn fx:id="rentalIdColumn" text="Rental ID" prefWidth="80"/>
+                                          <TableColumn fx:id="carInfoColumn" text="Car" prefWidth="150"/>
+                                          <TableColumn fx:id="startDateColumn" text="Start Date" prefWidth="120"/>
+                                          <TableColumn fx:id="endDateColumn" text="End Date" prefWidth="120"/>
+                                          <TableColumn fx:id="totalAmountColumn" text="Amount" prefWidth="100"/>
+                                          <TableColumn fx:id="rentalStatusColumn" text="Status" prefWidth="100"/>
+                                          <TableColumn fx:id="securityNotesColumn" text="🔐 Security Notes" prefWidth="200"/>
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              
+                              <Tab text="🔐 Security Log" closable="false">
+                                 <content>
+                                    <ScrollPane fitToWidth="true">
+                                       <content>
+                                          <VBox fx:id="securityLogContainer" spacing="8" style="-fx-padding: 10;">
+                                             <children>
+                                                <Label text="📊 Loading security logs..." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-padding: 20;"/>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </Tab>
+                              
+                              <Tab text="📧 Communication Log" closable="false">
+                                 <content>
+                                    <ScrollPane fitToWidth="true">
+                                       <content>
+                                          <VBox fx:id="communicationLogContainer" spacing="8" style="-fx-padding: 10;">
+                                             <children>
+                                                <Label text="📊 Loading communication logs..." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-padding: 20;"/>
+                                             </children>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </VBox>
+                  
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane> 

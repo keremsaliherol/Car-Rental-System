@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.LoginController">
+   
+   <!-- Ana Container -->
+   <center>
+      <VBox alignment="CENTER" spacing="30.0" styleClass="login-container">
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
+         
+         <!-- Logo ve Başlık -->
+         <VBox alignment="CENTER" spacing="15.0">
+            <Label text="🚗" styleClass="logo-icon">
+               <font>
+                  <Font size="72.0" />
+               </font>
+            </Label>
+            <Label text="Araç Kiralama Sistemi" styleClass="app-title">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label text="Hoş Geldiniz!" styleClass="welcome-text">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </VBox>
+         
+         <!-- Giriş Formu -->
+         <VBox spacing="20.0" styleClass="login-form" alignment="CENTER">
+            <padding>
+               <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+            
+            <!-- Kullanıcı Adı -->
+            <VBox spacing="8.0">
+               <Label text="👤 Kullanıcı Adı" styleClass="field-label">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <TextField fx:id="usernameField" promptText="Kullanıcı adınızı girin..." styleClass="login-field" editable="true" focusTraversable="true" />
+            </VBox>
+            
+            <!-- Şifre -->
+            <VBox spacing="8.0">
+               <Label text="🔒 Şifre" styleClass="field-label">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Label>
+               <PasswordField fx:id="passwordField" promptText="Şifrenizi girin..." styleClass="login-field" editable="true" focusTraversable="true" />
+            </VBox>
+            
+            <!-- Hatırla Beni ve Demo Modu -->
+            <HBox spacing="20.0" alignment="CENTER">
+               <CheckBox fx:id="rememberMeCheckBox" text="Beni Hatırla" styleClass="remember-checkbox" />
+               <Region HBox.hgrow="ALWAYS" />
+               <Hyperlink text="Demo Modu" onAction="#handleDemoLogin" styleClass="demo-link" />
+            </HBox>
+            
+            <!-- Giriş Butonu -->
+            <Button fx:id="loginButton" text="🔑 Giriş Yap" onAction="#handleLogin" styleClass="login-button" maxWidth="Infinity">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            
+            <!-- Hesap Oluştur Butonu -->
+            <Button fx:id="registerButton" text="📝 Hesap Oluştur" onAction="#handleRegister" styleClass="register-button" maxWidth="Infinity">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            
+            <!-- Durum Etiketi -->
+            <Label fx:id="messageLabel" text="" styleClass="status-label" />
+            
+         </VBox>
+         
+         <!-- Alt Bilgi -->
+         <VBox alignment="CENTER" spacing="10.0" styleClass="footer-info">
+            <Separator maxWidth="300.0" />
+            <Label text="💡 Demo modu için 'Demo Modu' linkine tıklayın" styleClass="info-text" />
+            <Label text="📞 Teknik destek için: support@carrent.com" styleClass="info-text" />
+         </VBox>
+         
+      </VBox>
+   </center>
+   
+   <!-- Alt Kısım -->
+   <bottom>
+      <HBox alignment="CENTER" styleClass="bottom-bar">
+         <padding>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+         </padding>
+         <Label text="© 2024 Araç Kiralama Sistemi - Tüm hakları saklıdır" styleClass="copyright-text" />
+      </HBox>
+   </bottom>
+   
+</BorderPane> 

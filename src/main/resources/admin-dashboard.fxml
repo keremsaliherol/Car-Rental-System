@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.AdminDashboardController"
+           prefWidth="1000" prefHeight="700">
+   <!-- Top Navigation Bar -->
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-padding: 15 25;">
+         <children>
+            <Label text="👑" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+            <Label text="Admin Panel" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button text="🚪 Logout" onAction="#handleLogout" style="-fx-background-color: #0D47A1; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+         </children>
+      </HBox>
+   </top>
+   
+   <!-- Left Sidebar Dashboard -->
+   <left>
+      <VBox spacing="0" style="-fx-background-color: #263238; -fx-padding: 0;" prefWidth="280">
+         <children>
+            <!-- Dashboard Header -->
+            <VBox alignment="CENTER" spacing="10" style="-fx-background-color: linear-gradient(to bottom, #1976D2, #0D47A1); -fx-padding: 25;">
+               <children>
+                  <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
+                     <image>
+                        <Image url="@applogo.png"/>
+                     </image>
+                  </ImageView>
+                  <Label text="Dashboard" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                  <Label text="Management Panel" style="-fx-font-size: 12px; -fx-text-fill: rgba(255,255,255,0.9);"/>
+               </children>
+            </VBox>
+            
+            <!-- Menu Items -->
+            <VBox spacing="2" style="-fx-padding: 10;">
+               <children>
+                  <!-- Add Car -->
+                  <Button onAction="#handleAddCar" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-cursor: hand;">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <children>
+                              <Label text="🚙" style="-fx-font-size: 20px;"/>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="Add Car" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                    <Label text="New car registration" style="-fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.6);"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  
+                  <!-- View Cars -->
+                  <Button onAction="#handleViewCars" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-cursor: hand;">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <children>
+                              <Label text="🚗" style="-fx-font-size: 20px;"/>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="Cars" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                    <Label text="View all cars" style="-fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.6);"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  
+                  <!-- Active Rentals -->
+                  <Button onAction="#handleViewActiveRentals" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-cursor: hand;">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <children>
+                              <Label text="📋" style="-fx-font-size: 20px;"/>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="Active Rentals" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                    <Label text="Ongoing rentals" style="-fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.6);"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  
+                  <!-- Delete Car -->
+                  <Button onAction="#handleDeleteCar" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-cursor: hand;">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <children>
+                              <Label text="🗑️" style="-fx-font-size: 20px;"/>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="Delete Car" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                    <Label text="Remove car records" style="-fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.6);"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  
+                  <!-- Rental History -->
+                  <Button onAction="#handleRentalHistory" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-cursor: hand;">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <children>
+                              <Label text="📜" style="-fx-font-size: 20px;"/>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="Rental History" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                    <Label text="Completed &amp; cancelled rentals" style="-fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.6);"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  
+                  <!-- Security Dashboard -->
+                  <Button onAction="#handleSecurityDashboard" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-cursor: hand;">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <children>
+                              <Label text="🔒" style="-fx-font-size: 20px;"/>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="Security Dashboard" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                    <Label text="RLS, encryption &amp; user management" style="-fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.6);"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  
+
+                  
+
+                  
+                  <!-- Reports Dashboard -->
+                  <Button onAction="#handleReportsDashboard" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0; -fx-cursor: hand;">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;">
+                           <children>
+                              <Label text="📈" style="-fx-font-size: 20px;"/>
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label text="Reports Dashboard" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                    <Label text="Analytics &amp; business reports" style="-fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.6);"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </graphic>
+                  </Button>
+                  
+
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   
+   <!-- Main Content Area -->
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f5f5;">
+         <content>
+            <VBox spacing="25" style="-fx-padding: 30;">
+               <children>
+                  <!-- Welcome Section -->
+                  <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <VBox spacing="5">
+                           <children>
+                              <Label text="Welcome, Admin!" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <Label text="Welcome to the system management panel. You can perform any operation from the menu on the left." 
+                                           style="-fx-font-size: 14px; -fx-text-fill: #666;" wrapText="true"/>
+                                    <Label fx:id="statusLabel" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                                 </children>
+                              </VBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Recent Activity -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                           <children>
+                              <Label text="📋 Recent Activities" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <Region HBox.hgrow="ALWAYS"/>
+                              <Button text="🔄" onAction="#handleRefreshActivities" 
+                                      style="-fx-background-color: #f0f0f0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 5 10; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                        
+                        <ScrollPane fx:id="activitiesScrollPane" fitToWidth="true" prefHeight="200" 
+                                    style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                           <content>
+                              <VBox fx:id="activitiesContainer" spacing="8" style="-fx-padding: 5;">
+                                 <children>
+                                    <!-- Dynamic activities will be loaded here -->
+                                    <Label text="📊 Loading activities..." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-padding: 20;"/>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane> 

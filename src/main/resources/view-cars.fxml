@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.ViewCarsController"
+           prefWidth="1000" prefHeight="700" stylesheets="@css/style.css">
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-padding: 25;">
+         <HBox alignment="CENTER_LEFT" spacing="20">
+            <Button onAction="#handleBackToDashboard" style="-fx-background-color: #0D47A1; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" text="← Back to Dashboard" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" text="🚗 Cars" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="totalCarsLabel" style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="Total 0 cars" />
+         </HBox>
+      </VBox>
+   </top>
+   <center>
+      <VBox spacing="10" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         
+         <!-- Filtre Bölümü -->
+         <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: white; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+            <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="🔍 Filters:" />
+            
+            <ComboBox fx:id="categoryFilterComboBox" promptText="All Categories" styleClass="custom-combo-box" />
+            <ComboBox fx:id="statusFilterComboBox" promptText="All Statuses" styleClass="custom-combo-box" />
+            <ComboBox fx:id="fuelFilterComboBox" promptText="Fuel Type" styleClass="custom-combo-box" />
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <Button onAction="#handleRefreshCars" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" text="🔄 Refresh" />
+            <Button onAction="#handleClearFilters" style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" text="Clear" />
+            <Button onAction="#handleApplyFilters" style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" text="Filter" />
+         </HBox>
+         
+         <!-- Araçlar Grid -->
+         <ScrollPane fx:id="carsScrollPane" fitToWidth="true" style="-fx-background-color: #f5f5f5; -fx-background: #f5f5f5;">
+            <!-- Grid content will be dynamically loaded -->
+         </ScrollPane>
+      </VBox>
+   </center>
+   <bottom>
+      <VBox style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1 0 0 0; -fx-padding: 15;">
+         <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333;" text="✅ Cars loaded" />
+            
+            <Region HBox.hgrow="ALWAYS" />
+            
+            <Label style="-fx-font-size: 12px; -fx-text-fill: #666;" text="💡 Tip: Click on car cards to go to customer service page" />
+         </HBox>
+      </VBox>
+   </bottom>
+</BorderPane> 

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.CustomerDashboardController"
+           prefWidth="1200" prefHeight="800">
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #2196F3, #1976D2); -fx-padding: 20;">
+         <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="🚗 Customer Dashboard" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="welcomeLabel" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Welcome!" />
+            <Button onAction="#handleLogout" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;" text="🚪 Logout" />
+         </HBox>
+      </VBox>
+   </top>
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f5f5;">
+         <VBox spacing="30" style="-fx-padding: 30;">
+            
+            <!-- Profile Information Card -->
+            <VBox spacing="20" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+               
+               <HBox alignment="CENTER_LEFT" spacing="15">
+                  <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" text="👤 My Profile" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <!-- Profile is view-only now -->
+               </HBox>
+               
+               <GridPane hgap="20" vgap="15">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="NEVER" minWidth="150" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                     <ColumnConstraints hgrow="NEVER" minWidth="150" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                  </columnConstraints>
+                  
+                  <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-text-fill: #666;" />
+                  <Label fx:id="profileFullName" text="Loading..." GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+                  
+                  <Label text="Phone:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-text-fill: #666;" />
+                  <Label fx:id="profilePhone" text="Loading..." GridPane.columnIndex="3" GridPane.rowIndex="0" style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+                  
+                  <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-text-fill: #666;" />
+                  <Label fx:id="profileEmail" text="Loading..." GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+                  
+                  <Label text="Driver License:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-text-fill: #666;" />
+                  <Label fx:id="profileDriverLicense" text="Loading..." GridPane.columnIndex="3" GridPane.rowIndex="1" style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+                  
+                  <Label text="Birth Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-text-fill: #666;" />
+                  <Label fx:id="profileBirthDate" text="Loading..." GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+                  
+                  <Label text="Address:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold; -fx-text-fill: #666;" />
+                  <Label fx:id="profileAddress" text="Loading..." GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="3" wrapText="true" style="-fx-font-size: 14px; -fx-text-fill: #333;" />
+               </GridPane>
+            </VBox>
+            
+            <!-- Quick Actions -->
+            <VBox spacing="20" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+               
+               <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;" text="🚀 Quick Actions" />
+               
+               <HBox spacing="20" alignment="CENTER">
+                  <Button onAction="#handleMyRentals" prefHeight="80" prefWidth="200" 
+                          style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: linear-gradient(to bottom, #2196F3, #1976D2); -fx-text-fill: white; -fx-background-radius: 15;" 
+                          text="📋 My Rentals" />
+                  
+                  <Button onAction="#handleChangePassword" prefHeight="80" prefWidth="200" 
+                          style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-background-color: linear-gradient(to bottom, #FF9800, #F57C00); -fx-text-fill: white; -fx-background-radius: 15;" 
+                          text="🔐 Change Password" />
+               </HBox>
+            </VBox>
+            
+            <!-- Rental Statistics -->
+            <VBox spacing="20" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 15; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 3);">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+               
+               <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #9C27B0;" text="📊 My Rental Statistics" />
+               
+               <HBox spacing="30" alignment="CENTER">
+                  <!-- Total Rentals -->
+                  <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #e3f2fd; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20; -fx-min-width: 150;">
+                     <Label style="-fx-font-size: 32px;" text="🚗" />
+                     <Label fx:id="totalRentalsLabel" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1976D2;" text="0" />
+                     <Label style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;" text="Total Rentals" />
+                  </VBox>
+                  
+                  <!-- Active Rentals -->
+                  <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #e8f5e8; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20; -fx-min-width: 150;">
+                     <Label style="-fx-font-size: 32px;" text="🔄" />
+                     <Label fx:id="activeRentalsLabel" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;" text="0" />
+                     <Label style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;" text="Active Rentals" />
+                  </VBox>
+                  
+                  <!-- Total Spent -->
+                  <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #fff3e0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20; -fx-min-width: 150;">
+                     <Label style="-fx-font-size: 32px;" text="💰" />
+                     <Label fx:id="totalSpentLabel" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #FF9800;" text="₺0" />
+                     <Label style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;" text="Total Spent" />
+                  </VBox>
+               </HBox>
+            </VBox>
+            
+         </VBox>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <VBox style="-fx-background-color: #F5F5F5; -fx-border-color: #E0E0E0; -fx-border-width: 1 0 0 0;">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+         <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-text-fill: #666;" text="✅ Welcome to Car Rental System">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </VBox>
+   </bottom>
+</BorderPane> 

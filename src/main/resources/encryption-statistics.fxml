@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.EncryptionStatisticsController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #673AB7, #9C27B0);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="📊" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="Encryption Statistics" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="🔄 Refresh" onAction="#handleRefresh"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="Data Encryption &amp; Security Metrics" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Statistics Cards Row 1 -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Encrypted Records Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🔐" style="-fx-font-size: 32px;"/>
+                        <Label text="Encrypted Records" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="encryptedRecordsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="protected" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Unencrypted Records Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFEBEE; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(244,67,54,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🔓" style="-fx-font-size: 32px;"/>
+                        <Label text="Unencrypted Records" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                        <Label fx:id="unencryptedRecordsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #B71C1C;"/>
+                        <Label text="vulnerable" style="-fx-font-size: 12px; -fx-text-fill: #F44336;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Encryption Percentage Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📈" style="-fx-font-size: 32px;"/>
+                        <Label text="Encryption Rate" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="encryptionPercentageLabel" text="0%" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="coverage" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Algorithm Strength Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFF3E0; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(255,152,0,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🛡️" style="-fx-font-size: 32px;"/>
+                        <Label text="Algorithm" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #E65100;"/>
+                        <Label fx:id="algorithmLabel" text="AES-256" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #BF360C;"/>
+                        <Label text="encryption" style="-fx-font-size: 12px; -fx-text-fill: #FF9800;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Encryption Details Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="🔐 Encryption Details by Table" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Scan Tables" onAction="#handleScanTables"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="encryptionTable" prefHeight="300" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="tableNameColumn" prefWidth="200" text="Table Name" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="encryptedFieldsColumn" prefWidth="250" text="Encrypted Fields" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="totalRecordsColumn" prefWidth="150" text="Total Records" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="encryptedCountColumn" prefWidth="150" text="Encrypted Count" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="encryptionRateColumn" prefWidth="120" text="Rate" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="120" text="Status" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="actionsColumn" prefWidth="150" text="Actions" style="-fx-alignment: CENTER;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            
+            <!-- Encryption Configuration Section -->
+            <HBox spacing="20">
+               <children>
+                  <!-- Encryption Settings Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="⚙️ Encryption Settings" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <GridPane hgap="15" vgap="15">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="NEVER" minWidth="150"/>
+                              <ColumnConstraints hgrow="ALWAYS"/>
+                           </columnConstraints>
+                           
+                           <Label text="Algorithm:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                           <ComboBox fx:id="algorithmComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200"/>
+                           
+                           <Label text="Key Size:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                           <ComboBox fx:id="keySizeComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+                           
+                           <Label text="Auto-Encrypt:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                           <CheckBox fx:id="autoEncryptCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="2" text="Enable automatic encryption for new records"/>
+                           
+                           <Label text="Backup Keys:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                           <CheckBox fx:id="backupKeysCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="3" text="Automatically backup encryption keys"/>
+                        </GridPane>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <Button text="💾 Save Settings" onAction="#handleSaveSettings"
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="🔄 Reset to Default" onAction="#handleResetSettings"
+                                      style="-fx-background-color: #f0f0f0; -fx-text-fill: #666; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Key Management Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" prefWidth="300">
+                     <children>
+                        <Label text="🔑 Key Management" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <VBox spacing="10">
+                           <children>
+                              <Button text="🔑 Generate New Key" onAction="#handleGenerateKey" prefWidth="250"
+                                      style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="📤 Export Keys" onAction="#handleExportKeys" prefWidth="250"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="📥 Import Keys" onAction="#handleImportKeys" prefWidth="250"
+                                      style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="🔄 Rotate Keys" onAction="#handleRotateKeys" prefWidth="250"
+                                      style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                           </children>
+                        </VBox>
+                        
+                        <Separator/>
+                        
+                        <VBox spacing="5">
+                           <children>
+                              <Label text="Key Status:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                              <Label fx:id="keyStatusLabel" text="✅ Active" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                              <Label text="Last Rotation:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                              <Label fx:id="lastRotationLabel" text="2024-01-15" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ Encryption statistics loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🔐 Monitor and manage data encryption" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.EncryptionStatisticsController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #673AB7, #9C27B0);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="📊" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="Encryption Statistics" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="🔄 Refresh" onAction="#handleRefresh"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="Data Encryption &amp; Security Metrics" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Statistics Cards Row 1 -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Encrypted Records Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🔐" style="-fx-font-size: 32px;"/>
+                        <Label text="Encrypted Records" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="encryptedRecordsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="protected" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Unencrypted Records Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFEBEE; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(244,67,54,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🔓" style="-fx-font-size: 32px;"/>
+                        <Label text="Unencrypted Records" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                        <Label fx:id="unencryptedRecordsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #B71C1C;"/>
+                        <Label text="vulnerable" style="-fx-font-size: 12px; -fx-text-fill: #F44336;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Encryption Percentage Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📈" style="-fx-font-size: 32px;"/>
+                        <Label text="Encryption Rate" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="encryptionPercentageLabel" text="0%" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="coverage" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Algorithm Strength Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFF3E0; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(255,152,0,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🛡️" style="-fx-font-size: 32px;"/>
+                        <Label text="Algorithm" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #E65100;"/>
+                        <Label fx:id="algorithmLabel" text="AES-256" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #BF360C;"/>
+                        <Label text="encryption" style="-fx-font-size: 12px; -fx-text-fill: #FF9800;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Encryption Details Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="🔐 Encryption Details by Table" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Scan Tables" onAction="#handleScanTables"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="encryptionTable" prefHeight="300" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="tableNameColumn" prefWidth="200" text="Table Name" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="encryptedFieldsColumn" prefWidth="250" text="Encrypted Fields" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="totalRecordsColumn" prefWidth="150" text="Total Records" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="encryptedCountColumn" prefWidth="150" text="Encrypted Count" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="encryptionRateColumn" prefWidth="120" text="Rate" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="120" text="Status" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="actionsColumn" prefWidth="150" text="Actions" style="-fx-alignment: CENTER;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            
+            <!-- Encryption Configuration Section -->
+            <HBox spacing="20">
+               <children>
+                  <!-- Encryption Settings Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="⚙️ Encryption Settings" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <GridPane hgap="15" vgap="15">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="NEVER" minWidth="150"/>
+                              <ColumnConstraints hgrow="ALWAYS"/>
+                           </columnConstraints>
+                           
+                           <Label text="Algorithm:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                           <ComboBox fx:id="algorithmComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200"/>
+                           
+                           <Label text="Key Size:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                           <ComboBox fx:id="keySizeComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+                           
+                           <Label text="Auto-Encrypt:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                           <CheckBox fx:id="autoEncryptCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="2" text="Enable automatic encryption for new records"/>
+                           
+                           <Label text="Backup Keys:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                           <CheckBox fx:id="backupKeysCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="3" text="Automatically backup encryption keys"/>
+                        </GridPane>
+                        
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                           <children>
+                              <Button text="💾 Save Settings" onAction="#handleSaveSettings"
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="🔄 Reset to Default" onAction="#handleResetSettings"
+                                      style="-fx-background-color: #f0f0f0; -fx-text-fill: #666; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Key Management Card -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" prefWidth="300">
+                     <children>
+                        <Label text="🔑 Key Management" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <VBox spacing="10">
+                           <children>
+                              <Button text="🔑 Generate New Key" onAction="#handleGenerateKey" prefWidth="250"
+                                      style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="📤 Export Keys" onAction="#handleExportKeys" prefWidth="250"
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="📥 Import Keys" onAction="#handleImportKeys" prefWidth="250"
+                                      style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                              <Button text="🔄 Rotate Keys" onAction="#handleRotateKeys" prefWidth="250"
+                                      style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                           </children>
+                        </VBox>
+                        
+                        <Separator/>
+                        
+                        <VBox spacing="5">
+                           <children>
+                              <Label text="Key Status:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                              <Label fx:id="keyStatusLabel" text="✅ Active" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                              <Label text="Last Rotation:" style="-fx-font-weight: bold; -fx-font-size: 12px;"/>
+                              <Label fx:id="lastRotationLabel" text="2024-01-15" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ Encryption statistics loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🔐 Monitor and manage data encryption" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 

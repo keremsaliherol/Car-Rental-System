@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.SystemMonitoringController"
+           prefWidth="1200" prefHeight="800">
+   
+   <!-- Top Navigation Bar -->
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: linear-gradient(to right, #1976D2, #0D47A1); -fx-padding: 15 25;">
+         <children>
+            <Label text="📊" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+            <Label text="System Monitoring" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <Button text="🏠 Back to Admin" onAction="#handleBackToAdmin" style="-fx-background-color: #0D47A1; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+         </children>
+      </HBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f5f5;">
+         <content>
+            <VBox spacing="25" style="-fx-padding: 30;">
+               <children>
+                  
+                  <!-- System Status Overview -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                           <children>
+                              <Label text="🖥️ System Status" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <Region HBox.hgrow="ALWAYS"/>
+                              <Button text="🔄 Refresh All" onAction="#handleRefreshAll" 
+                                      style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                        
+                        <GridPane hgap="20" vgap="15">
+                           <columnConstraints>
+                              <ColumnConstraints percentWidth="25"/>
+                              <ColumnConstraints percentWidth="25"/>
+                              <ColumnConstraints percentWidth="25"/>
+                              <ColumnConstraints percentWidth="25"/>
+                           </columnConstraints>
+                           
+                           <!-- Database Status -->
+                           <VBox spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="0">
+                              <children>
+                                 <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <children>
+                                       <Label text="🗄️" style="-fx-font-size: 18px;"/>
+                                       <Label text="Database" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                                    </children>
+                                 </HBox>
+                                 <Label fx:id="dbStatusLabel" text="Status: Connected" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                                 <Label fx:id="dbSizeLabel" text="Size: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                           
+                           <!-- SQL Agent Status -->
+                           <VBox spacing="8" style="-fx-background-color: #FFF3E0; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="1">
+                              <children>
+                                 <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <children>
+                                       <Label text="⚙️" style="-fx-font-size: 18px;"/>
+                                       <Label text="SQL Agent" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #F57C00;"/>
+                                    </children>
+                                 </HBox>
+                                 <Label fx:id="agentStatusLabel" text="Status: Checking..." style="-fx-font-size: 12px; -fx-text-fill: #FF9800;"/>
+                                 <Label text="Express Edition" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                           
+                           <!-- Backup Status -->
+                           <VBox spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="2">
+                              <children>
+                                 <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <children>
+                                       <Label text="💾" style="-fx-font-size: 18px;"/>
+                                       <Label text="Backups" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+                                    </children>
+                                 </HBox>
+                                 <Label fx:id="lastBackupLabel" text="Last: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                                 <Label fx:id="backupSizeLabel" text="Size: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                           
+                           <!-- Performance -->
+                           <VBox spacing="8" style="-fx-background-color: #F3E5F5; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="3">
+                              <children>
+                                 <HBox alignment="CENTER_LEFT" spacing="8">
+                                    <children>
+                                       <Label text="📈" style="-fx-font-size: 18px;"/>
+                                       <Label text="Performance" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #7B1FA2;"/>
+                                    </children>
+                                 </HBox>
+                                 <Label fx:id="connectionCountLabel" text="Connections: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #9C27B0;"/>
+                                 <Label fx:id="uptimeLabel" text="Uptime: Loading..." style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  
+                  <!-- SQL Server Agent Jobs -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="15">
+                           <children>
+                              <Label text="⚙️ SQL Server Agent Jobs" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <Region HBox.hgrow="ALWAYS"/>
+                              <Button text="▶️ Run Manual Backup" onAction="#handleManualBackup" 
+                                      style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                           </children>
+                        </HBox>
+                        
+                                                 <TableView fx:id="jobsTable" prefHeight="200">
+                            <columns>
+                               <TableColumn text="Job Name" prefWidth="200"/>
+                               <TableColumn text="Status" prefWidth="100"/>
+                               <TableColumn text="Last Run" prefWidth="150"/>
+                               <TableColumn text="Next Run" prefWidth="150"/>
+                               <TableColumn text="Description" prefWidth="300"/>
+                               <TableColumn text="Actions" prefWidth="150"/>
+                            </columns>
+                         </TableView>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Backup Management -->
+                  <HBox spacing="20">
+                     <children>
+                        
+                        <!-- Backup History -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="💾 Backup History" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              
+                              <ScrollPane fx:id="backupHistoryScrollPane" fitToWidth="true" prefHeight="200" 
+                                          style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                 <content>
+                                    <VBox fx:id="backupHistoryContainer" spacing="8" style="-fx-padding: 5;">
+                                       <children>
+                                          <Label text="📊 Loading backup history..." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-padding: 20;"/>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                              
+                              <HBox spacing="10">
+                                 <children>
+                                    <Button text="🗂️ Browse Backups" onAction="#handleBrowseBackups" 
+                                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" 
+                                            HBox.hgrow="ALWAYS"/>
+                                    <Button text="🔄 Restore" onAction="#handleRestoreBackup" 
+                                            style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" 
+                                            HBox.hgrow="ALWAYS"/>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- System Logs -->
+                        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="📜 System Logs" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              
+                              <ScrollPane fx:id="systemLogsScrollPane" fitToWidth="true" prefHeight="200" 
+                                          style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                                 <content>
+                                    <VBox fx:id="systemLogsContainer" spacing="8" style="-fx-padding: 5;">
+                                       <children>
+                                          <Label text="📊 Loading system logs..." style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-padding: 20;"/>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                              
+                              <HBox spacing="10">
+                                 <children>
+                                    <Button text="🔍 View All Logs" onAction="#handleViewAllLogs" 
+                                            style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" 
+                                            HBox.hgrow="ALWAYS"/>
+                                    <Button text="🗑️ Clear Logs" onAction="#handleClearLogs" 
+                                            style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" 
+                                            HBox.hgrow="ALWAYS"/>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        
+                     </children>
+                  </HBox>
+                  
+                  <!-- Database Statistics -->
+                  <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                     <children>
+                        <Label text="📊 Database Statistics" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        
+                        <GridPane hgap="20" vgap="15">
+                           <columnConstraints>
+                              <ColumnConstraints percentWidth="20"/>
+                              <ColumnConstraints percentWidth="20"/>
+                              <ColumnConstraints percentWidth="20"/>
+                              <ColumnConstraints percentWidth="20"/>
+                              <ColumnConstraints percentWidth="20"/>
+                           </columnConstraints>
+                           
+                           <!-- Total Cars -->
+                           <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #E8F5E8; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="0">
+                              <children>
+                                 <Label text="🚗" style="-fx-font-size: 24px;"/>
+                                 <Label fx:id="totalCarsLabel" text="0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                                 <Label text="Total Cars" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                           
+                           <!-- Total Customers -->
+                           <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #E3F2FD; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="1">
+                              <children>
+                                 <Label text="👥" style="-fx-font-size: 24px;"/>
+                                 <Label fx:id="totalCustomersLabel" text="0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+                                 <Label text="Total Customers" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                           
+                           <!-- Active Rentals -->
+                           <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #FFF3E0; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="2">
+                              <children>
+                                 <Label text="📋" style="-fx-font-size: 24px;"/>
+                                 <Label fx:id="activeRentalsLabel" text="0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #F57C00;"/>
+                                 <Label text="Active Rentals" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                           
+                           <!-- Total Revenue -->
+                           <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #F3E5F5; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="3">
+                              <children>
+                                 <Label text="💰" style="-fx-font-size: 24px;"/>
+                                 <Label fx:id="totalRevenueLabel" text="₺0.00" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #7B1FA2;"/>
+                                 <Label text="Total Revenue" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                           
+                           <!-- System Users -->
+                           <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #FFEBEE; -fx-padding: 15; -fx-border-radius: 8; -fx-background-radius: 8;" GridPane.columnIndex="4">
+                              <children>
+                                 <Label text="🔐" style="-fx-font-size: 24px;"/>
+                                 <Label fx:id="systemUsersLabel" text="0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                                 <Label text="System Users" style="-fx-font-size: 12px; -fx-text-fill: #666;"/>
+                              </children>
+                           </VBox>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane> 

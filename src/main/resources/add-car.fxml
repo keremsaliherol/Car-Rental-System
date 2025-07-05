@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.AddCarController"
+           prefWidth="1000" prefHeight="700" stylesheets="@css/style.css">
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-padding: 25;">
+         <HBox alignment="CENTER_LEFT" spacing="20">
+            <Button onAction="#handleBackToDashboard" style="-fx-background-color: #0D47A1; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;" text="← Back to Dashboard" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" text="🚙 Add New Car" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 14px;" text="System Management" />
+         </HBox>
+      </VBox>
+   </top>
+   <center>
+      <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f5f5;">
+         <content>
+            <VBox spacing="25" style="-fx-padding: 30;">
+               
+               <!-- Main Form -->
+               <VBox spacing="20" style="-fx-background-color: white; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                  <padding>
+                     <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                  </padding>
+                  
+                  <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" text="🚗 Car Information" />
+                  
+                  <GridPane hgap="20" vgap="15">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="140" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="NEVER" minWidth="140" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                     </columnConstraints>
+                     
+                     <!-- License Plate -->
+                     <Label style="-fx-font-weight: bold;" text="License Plate:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                     <TextField fx:id="plateNumberField" promptText="e.g.: 34 ABC 123" style="-fx-font-size: 14px; -fx-padding: 10;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                     
+                     <!-- Brand -->
+                     <Label style="-fx-font-weight: bold;" text="Brand:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                     <TextField fx:id="brandField" promptText="e.g.: Toyota" style="-fx-font-size: 14px; -fx-padding: 10;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                     
+                     <!-- Model -->
+                     <Label style="-fx-font-weight: bold;" text="Model:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                     <TextField fx:id="modelField" promptText="e.g.: Corolla" style="-fx-font-size: 14px; -fx-padding: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     
+                     <!-- Year -->
+                     <Label style="-fx-font-weight: bold;" text="Year:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                     <TextField fx:id="yearField" promptText="e.g.: 2023" style="-fx-font-size: 14px; -fx-padding: 10;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                     
+                     <!-- Daily Rate -->
+                     <Label style="-fx-font-weight: bold;" text="Daily Rate (₺):" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                     <TextField fx:id="dailyRateField" promptText="e.g.: 250.50" style="-fx-font-size: 14px; -fx-padding: 10;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     
+                     <!-- Category -->
+                     <Label style="-fx-font-weight: bold;" text="Category:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                     <ComboBox fx:id="categoryComboBox" id="categoryComboBox" promptText="Select category" 
+                              style="-fx-font-size: 14px; -fx-padding: 10;" 
+                              styleClass="custom-combo-box" 
+                              visibleRowCount="5"
+                              GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                     
+                     <!-- Mileage -->
+                     <Label style="-fx-font-weight: bold;" text="Mileage:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                     <TextField fx:id="mileageField" promptText="e.g.: 15000" style="-fx-font-size: 14px; -fx-padding: 10;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     
+                     <!-- Fuel Type -->
+                     <Label style="-fx-font-weight: bold;" text="Fuel Type:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                     <ComboBox fx:id="fuelTypeComboBox" id="fuelTypeComboBox" promptText="Select fuel type" 
+                              style="-fx-font-size: 14px; -fx-padding: 10;" 
+                              styleClass="custom-combo-box" 
+                              visibleRowCount="6"
+                              GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  </GridPane>
+               </VBox>
+               
+               <!-- Action Buttons -->
+               <HBox alignment="CENTER" spacing="20">
+                  <Button fx:id="clearFormButton" onAction="#handleClearForm" prefHeight="45" prefWidth="150" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: #FF9800; -fx-text-fill: white; -fx-background-radius: 6; -fx-cursor: hand;" text="🗑️ Clear" />
+                  <Button fx:id="addCarButton" onAction="#handleAddCar" prefHeight="45" prefWidth="180" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-text-fill: white; -fx-background-radius: 6; -fx-cursor: hand;" text="✅ Add Car" />
+               </HBox>
+               
+               <!-- Information Box -->
+               <VBox spacing="12" style="-fx-background-color: white; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+                  <padding>
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  </padding>
+                  
+                  <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1976D2;" text="ℹ️ Important Information" />
+                   <Label style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-wrap-text: true;" text="• License plate will be automatically converted to uppercase by the system" />
+                   <Label style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-wrap-text: true;" text="• Year field must be between 1900-2025" />
+                   <Label style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-wrap-text: true;" text="• Daily rate can be entered as decimal number (e.g.: 250.50)" />
+                   <Label style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-wrap-text: true;" text="• Fuel type selection is mandatory (Gasoline, Diesel, LPG, Hybrid, Electric)" />
+                   <Label style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-wrap-text: true;" text="• Car status will be automatically set to 'Available'" />
+                   <Label style="-fx-font-size: 13px; -fx-text-fill: #666; -fx-wrap-text: true;" text="• You will be automatically redirected to dashboard after successful addition" />
+               </VBox>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+   <bottom>
+      <VBox style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1 0 0 0; -fx-padding: 15;">
+         <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #333;" text="📝 Fill the form and add car" />
+      </VBox>
+   </bottom>
+</BorderPane> 

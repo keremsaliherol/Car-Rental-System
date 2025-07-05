@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.AuditTrailController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #37474F, #455A64);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="📋" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="Audit Trail" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="🔄 Refresh" onAction="#handleRefresh"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="System Activity &amp; Security Logs" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Statistics Cards -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Total Events Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📊" style="-fx-font-size: 32px;"/>
+                        <Label text="Total Events" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="totalEventsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="logged" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Security Events Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFEBEE; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(244,67,54,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🔒" style="-fx-font-size: 32px;"/>
+                        <Label text="Security Events" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                        <Label fx:id="securityEventsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #B71C1C;"/>
+                        <Label text="critical" style="-fx-font-size: 12px; -fx-text-fill: #F44336;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Today's Events Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📅" style="-fx-font-size: 32px;"/>
+                        <Label text="Today's Events" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="todayEventsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="today" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Filters Section -->
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <Label text="🔍 Filters:" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                  
+                  <ComboBox fx:id="eventTypeComboBox" promptText="All Events" prefWidth="150"
+                           styleClass="custom-combo-box"/>
+                  
+                  <ComboBox fx:id="severityComboBox" promptText="All Severity" prefWidth="150"
+                           styleClass="custom-combo-box"/>
+                  
+                  <DatePicker fx:id="dateFromPicker" promptText="From Date" prefWidth="140"
+                             style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+                  
+                  <DatePicker fx:id="dateToPicker" promptText="To Date" prefWidth="140"
+                             style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+                  
+                  <Button text="Apply Filters" onAction="#handleApplyFilters"
+                          style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Button text="Clear" onAction="#handleClearFilters"
+                          style="-fx-background-color: #f0f0f0; -fx-text-fill: #666; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+               </children>
+            </HBox>
+            
+            <!-- Audit Log Table -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="📋 Audit Log Entries" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="totalRecordsLabel" text="Total: 0 events" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="auditTable" prefHeight="400" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="timestampColumn" prefWidth="150" text="Timestamp" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="eventTypeColumn" prefWidth="120" text="Event Type" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="userColumn" prefWidth="120" text="User" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="actionColumn" prefWidth="200" text="Action" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="resourceColumn" prefWidth="150" text="Resource" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="ipAddressColumn" prefWidth="120" text="IP Address" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="severityColumn" prefWidth="100" text="Severity" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="detailsColumn" prefWidth="200" text="Details" style="-fx-alignment: CENTER_LEFT;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ Audit trail loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🔍 Monitor system activities and security events" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.AuditTrailController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #37474F, #455A64);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Security" onAction="#handleBackToSecurity" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="📋" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="Audit Trail" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+                  
+                  <Button text="🔄 Refresh" onAction="#handleRefresh"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="System Activity &amp; Security Logs" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Statistics Cards -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Total Events Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📊" style="-fx-font-size: 32px;"/>
+                        <Label text="Total Events" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="totalEventsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="logged" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Security Events Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #FFEBEE; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(244,67,54,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="🔒" style="-fx-font-size: 32px;"/>
+                        <Label text="Security Events" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #C62828;"/>
+                        <Label fx:id="securityEventsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #B71C1C;"/>
+                        <Label text="critical" style="-fx-font-size: 12px; -fx-text-fill: #F44336;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Today's Events Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="📅" style="-fx-font-size: 32px;"/>
+                        <Label text="Today's Events" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="todayEventsLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="today" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Filters Section -->
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <Label text="🔍 Filters:" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                  
+                  <ComboBox fx:id="eventTypeComboBox" promptText="All Events" prefWidth="150"
+                           styleClass="custom-combo-box"/>
+                  
+                  <ComboBox fx:id="severityComboBox" promptText="All Severity" prefWidth="150"
+                           styleClass="custom-combo-box"/>
+                  
+                  <DatePicker fx:id="dateFromPicker" promptText="From Date" prefWidth="140"
+                             style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+                  
+                  <DatePicker fx:id="dateToPicker" promptText="To Date" prefWidth="140"
+                             style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+                  
+                  <Button text="Apply Filters" onAction="#handleApplyFilters"
+                          style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Button text="Clear" onAction="#handleClearFilters"
+                          style="-fx-background-color: #f0f0f0; -fx-text-fill: #666; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+               </children>
+            </HBox>
+            
+            <!-- Audit Log Table -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="📋 Audit Log Entries" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="totalRecordsLabel" text="Total: 0 events" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="auditTable" prefHeight="400" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="timestampColumn" prefWidth="150" text="Timestamp" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="eventTypeColumn" prefWidth="120" text="Event Type" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="userColumn" prefWidth="120" text="User" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="actionColumn" prefWidth="200" text="Action" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="resourceColumn" prefWidth="150" text="Resource" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="ipAddressColumn" prefWidth="120" text="IP Address" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="severityColumn" prefWidth="100" text="Severity" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="detailsColumn" prefWidth="200" text="Details" style="-fx-alignment: CENTER_LEFT;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ Audit trail loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🔍 Monitor system activities and security events" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane> 

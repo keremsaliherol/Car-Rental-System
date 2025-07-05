@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kerem.ordersystem.carrentalsystem.controller.RentalHistoryController"
+           prefWidth="1200" prefHeight="800" stylesheets="@css/style.css">
+   
+   <!-- Top Header -->
+   <top>
+      <VBox style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2);">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20 30;">
+               <children>
+                  <Button text="⬅ Back to Dashboard" onAction="#handleBackToDashboard" 
+                          style="-fx-background-color: rgba(255,255,255,0.9); -fx-text-fill: #333; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Label text="📜" style="-fx-font-size: 28px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  <Label text="Rental History" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 0, 1);"/>
+                  
+                  <Region HBox.hgrow="ALWAYS"/>
+               </children>
+            </HBox>
+            
+            <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 0 30 20 30;">
+               <children>
+                  <Label style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 16px; -fx-font-weight: bold;" text="Completed &amp; Cancelled Rentals History" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   
+   <!-- Main Content -->
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-padding: 30;">
+         <children>
+            <!-- Filters Section -->
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <Label text="🔍 Filters:" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                  
+                  <ComboBox fx:id="statusFilterComboBox" promptText="All Statuses" prefWidth="150"
+                           styleClass="custom-combo-box"/>
+                  
+                  <ComboBox fx:id="customerFilterComboBox" promptText="All Customers" prefWidth="200"
+                           styleClass="custom-combo-box"/>
+                  
+                  <DatePicker fx:id="dateFromPicker" promptText="From Date" prefWidth="140"
+                             style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+                  
+                  <DatePicker fx:id="dateToPicker" promptText="To Date" prefWidth="140"
+                             style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+                  
+                  <Button text="Apply Filters" onAction="#handleApplyFilters"
+                          style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+                  
+                  <Button text="Clear" onAction="#handleClearFilters"
+                          style="-fx-background-color: #f0f0f0; -fx-text-fill: #666; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand;"/>
+                  
+                  <Button text="🔄 Refresh" onAction="#handleRefreshData"
+                          style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 16; -fx-cursor: hand; -fx-font-weight: bold;"/>
+               </children>
+            </HBox>
+            
+            <!-- Statistics Cards -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <children>
+                  <!-- Completed Rentals Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E3F2FD; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(33,150,243,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="✅" style="-fx-font-size: 32px;"/>
+                        <Label text="Completed" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+                        <Label fx:id="completedCountLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #0D47A1;"/>
+                        <Label text="rentals" style="-fx-font-size: 12px; -fx-text-fill: #2196F3;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Cancelled Rentals Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #F3E5F5; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(156,39,176,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="❌" style="-fx-font-size: 32px;"/>
+                        <Label text="Cancelled" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #7B1FA2;"/>
+                        <Label fx:id="cancelledCountLabel" text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #4A148C;"/>
+                        <Label text="rentals" style="-fx-font-size: 12px; -fx-text-fill: #9C27B0;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Total Revenue Card -->
+                  <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #E8F5E8; -fx-padding: 20; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.3), 10, 0, 0, 2);" prefWidth="200">
+                     <children>
+                        <Label text="💰" style="-fx-font-size: 32px;"/>
+                        <Label text="Total Revenue" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"/>
+                        <Label fx:id="totalRevenueLabel" text="0 TL" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1B5E20;"/>
+                        <Label text="from completed" style="-fx-font-size: 12px; -fx-text-fill: #4CAF50;"/>
+                     </children>
+                  </VBox>
+                  
+
+               </children>
+            </HBox>
+            
+            <!-- Table Section -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 25; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="15">
+                     <children>
+                        <Label text="📋 Rental History Records" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="totalRecordsLabel" text="Total: 0 records" style="-fx-font-size: 14px; -fx-text-fill: #666; -fx-font-weight: bold;"/>
+                     </children>
+                  </HBox>
+                  
+                  <TableView fx:id="rentalHistoryTable" prefHeight="400" style="-fx-background-color: transparent; -fx-border-color: #e0e0e0; -fx-border-radius: 8; -fx-background-radius: 8;">
+                     <columns>
+                        <TableColumn fx:id="rentalIdColumn" prefWidth="80" text="ID" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="customerNameColumn" prefWidth="150" text="Customer" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="carInfoColumn" prefWidth="180" text="Car" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="plateNumberColumn" prefWidth="120" text="Plate" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="rentDateColumn" prefWidth="100" text="Rent Date" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="returnDateColumn" prefWidth="100" text="Return Date" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="durationColumn" prefWidth="80" text="Days" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="totalAmountColumn" prefWidth="100" text="Amount" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="statusColumn" prefWidth="100" text="Status" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="actionsColumn" prefWidth="120" text="Actions" style="-fx-alignment: CENTER;"/>
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Bottom Status Bar -->
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #37474F; -fx-padding: 15 30;">
+         <children>
+            <Label fx:id="statusLabel" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #B0BEC5;" text="✅ Rental history loaded"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="📄 Use filters to search specific rentals" style="-fx-font-size: 12px; -fx-text-fill: #78909C;"/>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

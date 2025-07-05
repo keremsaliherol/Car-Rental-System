@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.kerem.ordersystem.carrentalsystem.controller.LoginController"
+            style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #E3F2FD 0%, #BBDEFB 100%);"
+            prefWidth="1000" prefHeight="700">
+   
+   <!-- Main Content -->
+   <center>
+      <VBox alignment="CENTER" spacing="0" style="-fx-padding: 40;">
+         <children>
+            <!-- Logo and Brand Section -->
+            <VBox spacing="30" alignment="CENTER" style="-fx-padding: 0 0 40 0;">
+               <children>
+                  <!-- Large Logo -->
+                  <ImageView fitHeight="150" fitWidth="150" preserveRatio="true" smooth="true" cache="true">
+                     <image>
+                        <Image url="@applogo.png" smooth="true" backgroundLoading="true" requestedWidth="300" requestedHeight="300"/>
+                     </image>
+                  </ImageView>
+                  
+                  <!-- Brand Title -->
+                  <VBox spacing="8" alignment="CENTER">
+                     <children>
+                        <Label text="Car Rental System" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #1976D2;"/>
+                        <Label text="Secure and Fast Login" style="-fx-font-size: 16px; -fx-text-fill: #42A5F5; -fx-font-weight: 500;"/>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            
+            <!-- Login Card -->
+            <VBox spacing="25" alignment="CENTER" maxWidth="400" 
+                  style="-fx-background-color: white; -fx-padding: 40; -fx-border-radius: 20; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 25, 0, 0, 8);">
+               <children>
+                  <!-- Welcome Text -->
+                  <VBox spacing="5" alignment="CENTER">
+                     <children>
+                        <Label text="Welcome!" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                        <Label text="Sign in to your account" style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Login Form -->
+                  <VBox spacing="20" alignment="CENTER">
+                     <children>
+                        <!-- Username Field -->
+                        <VBox spacing="8">
+                           <children>
+                              <Label text="Username" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <TextField fx:id="usernameField" promptText="Enter your username" prefWidth="320"
+                                         style="-fx-padding: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 14px; -fx-border-width: 2;"/>
+                           </children>
+                        </VBox>
+                        
+                        <!-- Password Field -->
+                        <VBox spacing="8">
+                           <children>
+                              <Label text="Password" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                              <PasswordField fx:id="passwordField" promptText="Enter your password" prefWidth="320"
+                                             style="-fx-padding: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 14px; -fx-border-width: 2;"/>
+                           </children>
+                        </VBox>
+                        
+                        <!-- Error Label -->
+                        <Label fx:id="errorLabel" style="-fx-text-fill: #f44336; -fx-font-size: 13px; -fx-font-weight: 500;" wrapText="true" maxWidth="320"/>
+                     </children>
+                  </VBox>
+                  
+                  <!-- Action Buttons -->
+                  <VBox spacing="15" alignment="CENTER">
+                     <children>
+                        <!-- Login Button -->
+                        <Button text="🔐 Sign In" onAction="#handleLogin" prefWidth="320"
+                                style="-fx-background-color: linear-gradient(to right, #42A5F5, #1976D2); -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 15; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(66,165,245,0.4), 10, 0, 0, 3);"/>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   
+   <!-- Footer -->
+   <bottom>
+      <VBox alignment="CENTER" style="-fx-background-color: rgba(255,255,255,0.9); -fx-padding: 25;">
+         <children>
+            <HBox spacing="15" alignment="CENTER">
+               <children>
+                  <Label text="© 2024 Car Rental System" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                  <Label text="•" style="-fx-text-fill: #ccc; -fx-font-size: 12px;"/>
+                  <Label text="Secure" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                  <Label text="•" style="-fx-text-fill: #ccc; -fx-font-size: 12px;"/>
+                  <Label text="Fast" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+                  <Label text="•" style="-fx-text-fill: #ccc; -fx-font-size: 12px;"/>
+                  <Label text="Reliable" style="-fx-text-fill: #666; -fx-font-size: 12px;"/>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane> 
